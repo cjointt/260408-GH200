@@ -4,20 +4,17 @@ on:
     types: [opened]
 jobs:
   comment:
+    permissions:
+      issues: write
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/github-script@0.8.0
-      with:
-        github-token: ${{secrets.GITHUB_TOKEN}}
-        script: |
+      - uses: actions/github-script@0.8.0
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
             github.issues.createComment({
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            body: "🎉 You've created this issue comment using GitHub Script!!!"
+            body: "🎉 You've created this issue comment Demo0408 using GitHub Script!!!"
             })
-            github.projects.createCard({
-            column_id: {{columnID}}, 
-            content_id: context.payload.issue.id,
-            content_type: "Issue"
-            });
